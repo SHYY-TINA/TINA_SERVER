@@ -54,6 +54,7 @@ public class KakaoClient
         requestBody.add("redirect_uri", kakaoConfig.getRedirectUri());
         requestBody.add("code", code);
         requestBody.add("client_id", kakaoConfig.getClientId());
+        requestBody.add("client_secret", kakaoConfig.getClientSecret());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
