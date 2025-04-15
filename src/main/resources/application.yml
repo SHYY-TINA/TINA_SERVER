@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8080
 
 spring:
   config:
@@ -53,3 +53,8 @@ jwt:
   token-expire: ${JWT_TOKEN_EXPIRE}
   refresh-token-expire: ${JWT_REFRESH_TOKEN_EXPIRE}
   issuer: ${JWT_ISSUER}
+
+kakao:
+  client-id: ${KAKAO_CLIENT_ID}
+  client-secret: ${KAKAO_CLIENT_SECRET}
+  redirect-uri: ${KAKAO_REDIRECT_URI}
