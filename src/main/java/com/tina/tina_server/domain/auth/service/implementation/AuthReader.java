@@ -8,12 +8,14 @@ import com.tina.tina_server.domain.user.domain.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthReader {
     private final TokenRepository tokenRepository;
 
-    public Token findByUser(Users user) {
+    public Token findByUser(Optional<Users> user) {
         return tokenRepository.findByUser(user)
                 .orElseThrow(TokenNotFoundException::new);
     }

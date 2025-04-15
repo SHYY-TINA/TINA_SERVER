@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -33,21 +35,21 @@ public class CommandAuthService {
     public LoginResponse login(String code){
         SocialPlatformUserInfo userInfo = kakaoClient.getUserInfo(kakaoClient.getAccessToken(code));
 
-        Users user = userReader.findBySocialAccountUid(userInfo.userId());
+        Optional<Users> user = userReader.findBySocialAccountUid(userInfo.userId());
 
-        if(user != null) {
+        if(user.isPresent()) {
+            Users existingUser = user.get();
             Token token = authReader.findByUser(user);
             TokenResponse tokenResponse = authUpdater.refreshToken(token);
 
-            boolean detail = user.getMbti() != null;
+            boolean detail = existingUser.getMbti() != null;
 
             return new LoginResponse(tokenResponse, detail);
         } else {
-            Users signupUser = userCreator.signup(userInfo.userId(),userInfo.profileImageUrl());
-            TokenResponse tokenResponse = authUpdater.publishToken(signupUser,null);
+            Users signupUser = userCreator.signup(userInfo.userId(), userInfo.profileImageUrl());
+            TokenResponse tokenResponse = authUpdater.publishToken(signupUser, null);
 
-            return new LoginResponse(tokenResponse,true);
-
+            return new LoginResponse(tokenResponse, true);
         }
     }
 

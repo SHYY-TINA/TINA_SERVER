@@ -1,6 +1,5 @@
 package com.tina.tina_server.domain.user.domain;
 
-import com.tina.tina_server.domain.auth.domain.Token;
 import com.tina.tina_server.domain.user.domain.vo.Role;
 import jakarta.persistence.*;
 import lombok.*;

@@ -6,13 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.tina.tina_server.domain.user.exception.UserNotFoundException;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserReader {
     private final UserRepository userRepository;
-    public Users findBySocialAccountUid(String id) {
-        return userRepository.findBySocialAccountUid(id)
-                .orElseThrow(UserNotFoundException::new);
+    public Optional<Users> findBySocialAccountUid(String id) {
+        return userRepository.findBySocialAccountUid(id);
     }
 
     public Users findById(Long id){
