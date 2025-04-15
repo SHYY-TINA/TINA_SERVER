@@ -49,7 +49,7 @@ public class CommandAuthService {
             Users signupUser = userCreator.signup(userInfo.userId(), userInfo.profileImageUrl());
             TokenResponse tokenResponse = authUpdater.publishToken(signupUser, null);
 
-            return new LoginResponse(tokenResponse, true);
+            return new LoginResponse(tokenResponse, false);
         }
     }
 
