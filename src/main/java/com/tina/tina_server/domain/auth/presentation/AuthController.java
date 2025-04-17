@@ -1,8 +1,8 @@
 package com.tina.tina_server.domain.auth.presentation;
 
-import com.tina.tina_server.domain.auth.presentation.dto.DetailRequest;
-import com.tina.tina_server.domain.auth.presentation.dto.LoginResponse;
-import com.tina.tina_server.domain.auth.presentation.dto.TokenRefreshRequest;
+import com.tina.tina_server.domain.auth.presentation.dto.req.DetailRequest;
+import com.tina.tina_server.domain.auth.presentation.dto.res.LoginResponse;
+import com.tina.tina_server.domain.auth.presentation.dto.req.TokenRefreshRequest;
 import com.tina.tina_server.domain.auth.service.CommandAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
