@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
-public class CommandUserService {
+@Transactional(readOnly = true)
+public class QueryUserService {
     private final UserReader userReader;
     public BasicInfoResponse getBasicInfo(Long id) {
         Users user = userReader.findById(id);
