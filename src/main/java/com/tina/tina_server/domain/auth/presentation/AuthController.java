@@ -45,4 +45,12 @@ public class AuthController {
         commandAuthService.submitAdditionalInfo(req,getUserId());
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "회원 탈퇴")
+    @DeleteMapping("/quit")
+    @PreAuthorize("hasAnyRole('USER')")
+    public ResponseEntity<Void> quitUser() {
+        commandAuthService.quitUser(getUserId());
+        return ResponseEntity.noContent().build();
+    }
 }
