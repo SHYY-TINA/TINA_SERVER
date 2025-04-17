@@ -32,7 +32,7 @@ public class AuthController {
 
     @Operation(summary = "로그아웃")
     @PostMapping("/logout")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Void> logout(@Valid @RequestBody TokenRefreshRequest req) {
         commandAuthService.logout(req);
         return ResponseEntity.noContent().build();
@@ -40,7 +40,7 @@ public class AuthController {
 
     @Operation(summary = "상세 정보 요청")
     @PatchMapping("/detail")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Void> submitAdditionalInfo(@RequestBody DetailRequest req) {
         commandAuthService.submitAdditionalInfo(req,getUserId());
         return ResponseEntity.noContent().build();
@@ -48,7 +48,7 @@ public class AuthController {
 
     @Operation(summary = "회원 탈퇴")
     @DeleteMapping("/quit")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public ResponseEntity<Void> quitUser() {
         commandAuthService.quitUser(getUserId());
         return ResponseEntity.noContent().build();

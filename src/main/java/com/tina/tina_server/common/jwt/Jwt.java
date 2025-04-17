@@ -75,7 +75,7 @@ public class Jwt {
             Claim roles = decodedJwt.getClaim("roles");
             if (!roles.isNull()) {
                 this.roles = Arrays.stream(roles.asArray(String.class))
-                        .map(Role::valueOf)
+                        .map(Role::from)
                         .toArray(Role[]::new);
             }
             this.iat = decodedJwt.getIssuedAt();

@@ -3,6 +3,8 @@ package com.tina.tina_server.domain.user.domain.vo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+
 @Getter
 @RequiredArgsConstructor
 public enum Role
@@ -12,4 +14,11 @@ public enum Role
     ADMIN("ROLE_ADMIN");
 
     private final String role;
+
+    public static Role from(String role) {
+        return Arrays.stream(Role.values())
+                .filter(r -> r.getRole().equals(role))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid role: " + role));
+    }
 }

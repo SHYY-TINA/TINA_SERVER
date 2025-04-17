@@ -7,12 +7,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -40,9 +44,13 @@ public class JwtAuthenticationFilter extends GenericFilter {
                     log.info("userId : " + memberId);
 
                     if (memberId != null) {
+                        List<SimpleGrantedAuthority> authorities = Arrays.stream(claims.getRoles())  // Role[] -> Stream
+                                .map(role -> new SimpleGrantedAuthority(role.getRole()))  // "ROLE_USER" 로 변환
+                                .collect(Collectors.toList());
+
                         UsernamePasswordAuthenticationToken authentication =
-                                new UsernamePasswordAuthenticationToken(memberId, null, null);
-                        log.info("authentication : " + authentication);
+                                new UsernamePasswordAuthenticationToken(memberId, null, authorities);
+
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     }
                 } catch (Exception e) {
