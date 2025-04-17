@@ -50,7 +50,7 @@ public class Jwt {
                 .withExpiresAt(new Date(now.getTime() + expireTime * 1000L))
                 .withClaim("userId", claims.userId)
                 .withArrayClaim("roles", Arrays.stream(claims.roles)  // roles를 문자열 배열로 변환
-                        .map(Role::name)  // Role 객체에서 이름(String)으로 변환
+                        .map(Role::getRole)  // Role 객체에서 이름(String)으로 변환
                         .toArray(String[]::new))  // String[] 배열로 변환
                 .sign(algorithm);
     }
