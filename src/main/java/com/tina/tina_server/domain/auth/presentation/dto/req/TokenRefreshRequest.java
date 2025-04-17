@@ -1,4 +1,4 @@
-package com.tina.tina_server.domain.auth.presentation.dto;
+package com.tina.tina_server.domain.auth.presentation.dto.req;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 
