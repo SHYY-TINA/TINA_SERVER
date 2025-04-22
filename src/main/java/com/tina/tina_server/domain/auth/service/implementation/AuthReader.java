@@ -22,6 +22,6 @@ public class AuthReader {
 
     public Token findByRefreshToken(String refreshToken) {
         return tokenRepository.findByRefreshToken(refreshToken)
-                .orElseThrow(() -> new TokenNotFoundException());
+                .orElseThrow(TokenNotFoundException::new);
     }
 }
