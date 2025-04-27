@@ -33,7 +33,4 @@ public class UserEmotions {
     private String feedbackContent;
 
     private String charmPointTitle;
-
-    @Column(columnDefinition = "TEXT")
-    private String charmPointContent;
 }
