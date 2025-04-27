@@ -7,6 +7,7 @@ spring:
       - optional:file:env/jwt.env[.properties]
       - optional:file:env/db.env[.properties]
       - optional:file:env/oauth.env[.properties]
+      - optional:file:env/ai.env[.properties]
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${POSTGRES_URL}
@@ -62,3 +63,13 @@ kakao:
   client-id: ${KAKAO_CLIENT_ID}
   client-secret: ${KAKAO_CLIENT_SECRET}
   redirect-uri: ${KAKAO_REDIRECT_URI}
+
+external:
+  parsing:
+    url: ${PARSING_URL}
+  ai:
+    url: ${AI_URL}
+    token: ${AI_TOKEN}
+
+knowledge:
+  id: ${KNOWLEDGE_ID}
