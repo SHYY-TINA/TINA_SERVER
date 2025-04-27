@@ -15,6 +15,8 @@ public class Chat {
 
     private Long emotionId;
 
+    private String type;
+
     private String chat;
 
     private String meaning;
