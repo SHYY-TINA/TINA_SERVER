@@ -34,11 +34,6 @@ public class ObservedEmotions {
 
     private String tipTitle;
 
-    @Column(columnDefinition = "TEXT")
-    private String tipContent;
-
     private String cautionTitle;
 
-    @Column(columnDefinition = "TEXT")
-    private String cautionContent;
 }
