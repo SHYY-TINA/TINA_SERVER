@@ -12,10 +12,10 @@ public record UserEmotionDetailResponse(
         String feedbackTitle,
         String feedbackContent,
         String charmPointTitle,
-        String charmPointContent,
+        List<String> charmPointContent,
         List<AnalyzedChat> chats
 ) {
-    public static UserEmotionDetailResponse from(UserEmotions entity, String userNickname, List<AnalyzedChat> chats) {
+    public static UserEmotionDetailResponse from(UserEmotions entity, String userNickname, List<String> charmPointContent, List<AnalyzedChat> chats) {
         return new UserEmotionDetailResponse(
                 userNickname,
                 entity.getPartnerName(),
@@ -24,7 +24,7 @@ public record UserEmotionDetailResponse(
                 entity.getFeedbackTitle(),
                 entity.getFeedbackContent(),
                 entity.getCharmPointTitle(),
-                entity.getCharmPointContent(),
+                charmPointContent,
                 chats
         );
     }

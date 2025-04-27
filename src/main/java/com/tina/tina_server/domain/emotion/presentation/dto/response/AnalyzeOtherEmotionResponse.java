@@ -7,8 +7,8 @@ public record AnalyzeOtherEmotionResponse(
         String feedbackTitle,
         String feedbackContent,
         String tipTitle,
-        String tipContent,
+        List<String> tipContent,
         String cautionTitle,
-        String cautionContent,
+        List<String> cautionContent,
         List<AnalyzedChat> chat
 ) {}

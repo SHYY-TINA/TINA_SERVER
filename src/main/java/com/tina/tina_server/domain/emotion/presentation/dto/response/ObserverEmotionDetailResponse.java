@@ -12,12 +12,12 @@ public record ObserverEmotionDetailResponse(
         String feedbackTitle,
         String feedbackContent,
         String tipTitle,
-        String tipContent,
+        List<String> tipContent,
         String cautionTitle,
-        String cautionContent,
+        List<String> cautionContent,
         List<AnalyzedChat> chats
 ) {
-    public static ObserverEmotionDetailResponse from(ObservedEmotions entity, String userNickname, List<AnalyzedChat> chats) {
+    public static ObserverEmotionDetailResponse from(ObservedEmotions entity, String userNickname, List<AnalyzedChat> chats, List<String> tipContent, List<String> cautionContent) {
         return new ObserverEmotionDetailResponse(
                 userNickname,
                 entity.getPartnerName(),
@@ -26,9 +26,9 @@ public record ObserverEmotionDetailResponse(
                 entity.getFeedbackTitle(),
                 entity.getFeedbackContent(),
                 entity.getTipTitle(),
-                entity.getTipContent(),
+                tipContent,
                 entity.getCautionTitle(),
-                entity.getCautionContent(),
+                cautionContent,
                 chats
         );
     }

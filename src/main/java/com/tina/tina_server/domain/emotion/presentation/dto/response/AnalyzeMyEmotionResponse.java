@@ -6,8 +6,8 @@ public record AnalyzeMyEmotionResponse(
         Integer charmScore,
         String feedbackTitle,
         String feedbackContent,
-        String CharmPointTitle,
-        String CharmPointContent,
+        String charmPointTitle,
+        List<String> charmPointContent,
         List<AnalyzedChat> chat
 ) {
 }
