@@ -1,6 +1,5 @@
 package com.tina.tina_server.domain.emotion.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.tina.tina_server.domain.emotion.presentation.dto.request.ObserverEmotionRequest;
 import com.tina.tina_server.domain.emotion.presentation.dto.request.UserEmotionRequest;
 import com.tina.tina_server.domain.emotion.presentation.dto.response.AnalyzeMyEmotionResponse;
@@ -12,7 +11,6 @@ import com.tina.tina_server.domain.emotion.service.implementation.EmotionDeleter
 import com.tina.tina_server.domain.emotion.util.EmotionInferenceClient;
 import com.tina.tina_server.domain.user.domain.Users;
 import com.tina.tina_server.domain.user.service.implementation.UserReader;
-import io.swagger.v3.core.util.Json;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,23 +26,20 @@ public class CommandEmotionService {
     private final EmotionCreator emotionCreator;
     private final EmotionDeleter emotionDeleter;
 
-//    public ObserverEmotionDetailResponse analyzeOtherEmotion(UserEmotionRequest req, Long userId) {
-//        Users user = userReader.findById(userId);
-//
-//        AnalyzeOtherEmotionResponse ai = inferenceClient.inferForObserver(user.getNickname(), user.getMbti(), req);
-//
-//        return emotionCreator.createOtherEmotion(user, ai, req.partnerMbti(), req.partnerName());
-//    }
-//    public UserEmotionDetailResponse analyzeMyEmotion(ObserverEmotionRequest req, Long userId) {
-
-    public JsonNode analyzeMyEmotion(ObserverEmotionRequest req, Long userId) {
+    public ObserverEmotionDetailResponse analyzeOtherEmotion(ObserverEmotionRequest req, Long userId) {
         Users user = userReader.findById(userId);
 
-//        AnalyzeMyEmotionResponse ai = inferenceClient.inferForUser(user.getNickname(), user.getMbti(), req);
-        JsonNode ai = inferenceClient.inferForUser(user.getNickname(), user.getMbti(), req);
+        AnalyzeOtherEmotionResponse ai = inferenceClient.inferForObserver(user.getNickname(), user.getMbti(), req);
 
-        return ai;
-//        return emotionCreator.createMyEmotion(user, ai, req.partnerMbti(), req.partnerName());
+        return emotionCreator.createOtherEmotion(user, ai, req.partnerMbti(), req.partnerName());
+    }
+
+    public UserEmotionDetailResponse analyzeMyEmotion(UserEmotionRequest req, Long userId) {
+        Users user = userReader.findById(userId);
+
+        AnalyzeMyEmotionResponse ai = inferenceClient.inferForUser(user.getNickname(), user.getMbti(), req);
+
+        return emotionCreator.createMyEmotion(user, ai, req.partnerMbti(), req.partnerName());
     }
 
     public void deleteMyEmotion(Long emotionId, Long userId) {

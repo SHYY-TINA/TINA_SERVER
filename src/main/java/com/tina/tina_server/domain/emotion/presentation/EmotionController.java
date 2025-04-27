@@ -29,15 +29,15 @@ public class EmotionController {
     private final CommandEmotionService commandEmotionService;
     private final QueryEmotionService queryEmotionService;
 
-//    @Operation(summary = "상대 감정 분석")
-//    @PostMapping("/observer")
-//    public ResponseEntity<ObserverEmotionDetailResponse> analyzeOtherEmotion(@RequestBody UserEmotionRequest req) {
-//        return ResponseEntity.ok(commandEmotionService.analyzeOtherEmotion(req,getUserId()));
-//    }
+    @Operation(summary = "상대 감정 분석")
+    @PostMapping("/observer")
+    public ResponseEntity<ObserverEmotionDetailResponse> analyzeOtherEmotion(@RequestBody ObserverEmotionRequest req) {
+        return ResponseEntity.ok(commandEmotionService.analyzeOtherEmotion(req,getUserId()));
+    }
 
     @Operation(summary = "내 감정 분석")
     @PostMapping("/user")
-    public ResponseEntity<JsonNode> analyzeMyEmotion(@RequestBody ObserverEmotionRequest req) {
+    public ResponseEntity<UserEmotionDetailResponse> analyzeMyEmotion(@RequestBody UserEmotionRequest req) {
         return ResponseEntity.ok(commandEmotionService.analyzeMyEmotion(req,getUserId()));
     }
 
