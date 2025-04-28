@@ -24,6 +24,10 @@ public class MbtiCompatibility {
     @Column(nullable = false, length = 4)
     private String secondMbti;
 
+    private String title;
+
+    private Integer heart;
+
     @Column(columnDefinition = "TEXT")
     private String communicationStyle;
 
