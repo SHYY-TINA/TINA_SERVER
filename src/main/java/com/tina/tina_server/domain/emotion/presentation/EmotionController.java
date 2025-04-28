@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +31,14 @@ public class EmotionController {
     private final QueryEmotionService queryEmotionService;
 
     @Operation(summary = "상대 감정 분석")
-    @PostMapping("/observer")
-    public ResponseEntity<ObserverEmotionDetailResponse> analyzeOtherEmotion(@RequestBody ObserverEmotionRequest req) {
+    @PostMapping(value = "/observer", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ObserverEmotionDetailResponse> analyzeOtherEmotion(@ModelAttribute ObserverEmotionRequest req) {
         return ResponseEntity.ok(commandEmotionService.analyzeOtherEmotion(req,getUserId()));
     }
 
     @Operation(summary = "내 감정 분석")
-    @PostMapping("/user")
-    public ResponseEntity<UserEmotionDetailResponse> analyzeMyEmotion(@RequestBody UserEmotionRequest req) {
+    @PostMapping(value = "/user", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<UserEmotionDetailResponse> analyzeMyEmotion(@ModelAttribute UserEmotionRequest req) {
         return ResponseEntity.ok(commandEmotionService.analyzeMyEmotion(req,getUserId()));
     }
 
