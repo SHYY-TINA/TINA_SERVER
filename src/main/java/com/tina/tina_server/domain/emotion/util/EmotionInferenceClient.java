@@ -76,7 +76,10 @@ public class EmotionInferenceClient {
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-
+            body.add("userNickname", userNickname);
+            body.add("userMBTI", userMbti);
+            body.add("partnerName", partnerName);
+            body.add("partnerMBTI", partnerMbti);
 
             if (file != null && !file.isEmpty()) {
                 log.info("파일 이름: {}", file.getOriginalFilename());
