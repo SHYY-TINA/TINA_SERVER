@@ -11,6 +11,7 @@ import com.tina.tina_server.domain.emotion.presentation.dto.response.AnalyzeMyEm
 import com.tina.tina_server.domain.emotion.presentation.dto.response.AnalyzeOtherEmotionResponse;
 import com.tina.tina_server.domain.emotion.presentation.dto.response.AnalyzedChat;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
@@ -28,6 +29,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class EmotionInferenceClient {
 
     private final ParsingClient parsingClient;
@@ -74,21 +76,24 @@ public class EmotionInferenceClient {
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-            body.add("userNickname", userNickname);
-            body.add("userMBTI", userMbti);
-            body.add("partnerName", partnerName);
-            body.add("partnerMBTI", partnerMbti);
-            body.add("file", new ByteArrayResource(file.getBytes()) {
-                @Override
-                public String getFilename() {
-                    return file.getOriginalFilename();
-                }
-            });
+
+
+            if (file != null && !file.isEmpty()) {
+                log.info("파일 이름: {}", file.getOriginalFilename());
+                body.add("file", new ByteArrayResource(file.getBytes()) {
+                    @Override
+                    public String getFilename() {
+                        return file.getOriginalFilename();
+                    }
+                });
+            } else {
+                log.error("업로드된 파일이 비어있거나 null입니다.");
+            }
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
+            log.info("요청 엔티티 생성: {}", requestEntity);
             ResponseEntity<String> response = restTemplate.postForEntity(
-                    parsingUrl,
+                    parsingUrl + "/analyze",
                     requestEntity,
                     String.class
             );
