@@ -13,7 +13,7 @@ public record UserEmotionDetailResponse(
         String feedbackContent,
         String charmPointTitle,
         List<String> charmPointContent,
-        List<AnalyzedChat> chats
+        List<AnalyzedChat> chat
 ) {
     public static UserEmotionDetailResponse from(UserEmotions entity, String userNickname, List<String> charmPointContent, List<AnalyzedChat> chats) {
         return new UserEmotionDetailResponse(

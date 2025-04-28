@@ -15,7 +15,7 @@ public record ObserverEmotionDetailResponse(
         List<String> tipContent,
         String cautionTitle,
         List<String> cautionContent,
-        List<AnalyzedChat> chats
+        List<AnalyzedChat> chat
 ) {
     public static ObserverEmotionDetailResponse from(ObservedEmotions entity, String userNickname, List<AnalyzedChat> chats, List<String> tipContent, List<String> cautionContent) {
         return new ObserverEmotionDetailResponse(
