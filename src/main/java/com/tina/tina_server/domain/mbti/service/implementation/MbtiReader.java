@@ -20,6 +20,8 @@ public class MbtiReader {
                 .orElseThrow(() -> new MbtiCompatibilityNotFoundException());
 
         return new MbtiCompatibilityResponse(
+                data.getTitle(),
+                data.getHeart(),
                 data.getCommunicationStyle(),
                 data.getStrengthInRelationship(),
                 data.getCaution(),
